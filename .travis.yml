@@ -8,5 +8,4 @@ python:
 install:
   - "pip install numpy --use-mirrors"
 # command to run tests
-script: python -c "import mdp;mdp.test()"
-
+script: "python setup.py install --prefix=../mdp_install && cd ../mdp_install && python -c 'import mdp;mdp.test()'"
