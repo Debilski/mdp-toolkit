@@ -323,6 +323,16 @@ def set_configuration():
             user.pp_secret = pp_secret
     except ImportError, exc:
         config.ExternalDepFailed('parallel_python', exc)
+    # even if we can import pp, starting the server may still fail
+    # for example with:
+    # OSError: [Errno 12] Cannot allocate memory
+    try:
+        server = pp.Server()
+        server.destroy()
+    except Exception, exc:
+        # no idea what exception the pp server may raise
+        # we need to catch all here...
+        config.ExternalDepFailed('parallel_python', exc)
     else:
         if os.getenv('MDP_DISABLE_PARALLEL_PYTHON'):
             config.ExternalDepFailed('parallel_python', 'disabled')
