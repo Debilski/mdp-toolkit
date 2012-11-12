@@ -4,8 +4,11 @@ python:
   - "2.7"
   - "3.2"
   - "3.3"
+env:
+  - NUMX=numpy
+  - NUMX=scipy
 # command to install dependencies
 install:
-  - "pip install numpy --use-mirrors"
+  - "pip install $NUMX --use-mirrors"
 # command to run tests
 script: "python setup.py install --home=~ && cd ~/lib/python && PYTHONPATH=. python -c 'import mdp;mdp.test()'"
