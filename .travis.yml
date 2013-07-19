@@ -5,11 +5,14 @@ python:
   - "3.2"
   - "3.3"
 env:
-  - NUMX=python-numpy
-  - NUMX=python-scipy
+  - NUMX=numpy
+  - NUMX=scipy
 virtualenv:
   system_site_packages: true
 # command to install dependencies
+before_install:
+  - export NUMX_PREFIX=$( [ ${TRAVIS_PYTHON_VERSION:0:1} == "3" ] || echo "python" && echo "python3" )
+  - export NUMX_PACKAGE="$NUMX_PREFIX-$NUMX"
 install:
   - SITE_PKG_DIR=$VIRTUAL_ENV/lib/python$TRAVIS_PYTHON_VERSION/site-packages
   - rm -f $VIRTUAL_ENV/lib/python$TRAVIS_PYTHON_VERSION/no-global-site-packages.txt
