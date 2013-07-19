@@ -7,6 +7,8 @@ python:
 env:
   - NUMX=python-numpy
   - NUMX=python-scipy
+virtualenv:
+  system_site_packages: true
 # command to install dependencies
 before_install:
  - sudo apt-get install -qq $NUMX
