@@ -21,4 +21,4 @@ install:
   - sudo apt-get install -qq $NUMX_PACKAGE
 #  - "pip install $NUMX --use-mirrors"
 # command to run tests
-script: "python setup.py install --home=~ && cd ~/lib/python && PYTHONPATH=. python -c 'import mdp;mdp.test()'"
+script: apt-get search scipy #"python setup.py install --home=~ && cd ~/lib/python && PYTHONPATH=. python -c 'import mdp;mdp.test()'"
