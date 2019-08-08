@@ -69,7 +69,7 @@ def test_caching_extension(tmpdir):
             assert _counter == k
 
 @requires_joblib
-def test_different_instances_same_content(tmpdir.strpath):
+def test_different_instances_same_content(tmpdir):
     global _counter
     x = mdp.numx.array([[100.]], dtype='d')
 
