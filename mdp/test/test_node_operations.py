@@ -48,7 +48,7 @@ def test_Node_save(tmpdir):
     assert generic_node.dummy_attr != copy_node.dummy_attr,\
            'Node save (string) method did not work'
     # test file save
-    dummy_file = tempfile.mktemp(prefix='MDP_', suffix=".pic", dir=tmpdir)
+    dummy_file = tempfile.mktemp(prefix='MDP_', suffix=".pic", dir=tmpdir.strpath)
     generic_node.save(dummy_file, protocol=1)
     dummy_file = open(dummy_file, 'rb')
     copy_node = pickle.load(dummy_file)

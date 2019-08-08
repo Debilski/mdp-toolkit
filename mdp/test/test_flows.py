@@ -67,7 +67,7 @@ def testFlow_save(tmpdir):
     assert flow[0].dummy_attr != copy_flow[0].dummy_attr, \
            'Flow save (string) method did not work'
     # test file save
-    dummy_file = tempfile.mktemp(prefix='MDP_', suffix=".pic", dir=tmpdir)
+    dummy_file = tempfile.mktemp(prefix='MDP_', suffix=".pic", dir=tmpdir.strpath)
     flow.save(dummy_file, protocol=1)
     dummy_file = open(dummy_file, 'rb')
     copy_flow = pickle.load(dummy_file)
@@ -304,7 +304,7 @@ def testCrashRecoveryException(tmpdir):
         raise mdp.CrashRecoveryException('bogus errstr', a, Exception())
     except mdp.CrashRecoveryException as e:
         filename1 = e.dump()
-        filename2 = e.dump(tempfile.mkstemp(prefix='MDP_', dir=tmpdir)[1])
+        filename2 = e.dump(tempfile.mkstemp(prefix='MDP_', dir=tmpdir.strpath)[1])
         assert isinstance(e.parent_exception, Exception)
 
     for fname in filename1, filename2:

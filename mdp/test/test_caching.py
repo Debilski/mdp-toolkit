@@ -43,7 +43,7 @@ def test_caching_extension(tmpdir):
     # reset counter
     _counter = 0
     # activate the extension
-    cachedir = tempfile.mkdtemp(prefix='mdp-tmp-joblib-cache.', dir=tmpdir)
+    cachedir = tempfile.mkdtemp(prefix='mdp-tmp-joblib-cache.', dir=tmpdir.strpath)
     mdp.caching.activate_caching(cachedir=cachedir)
     assert mdp.get_active_extensions() == ['cache_execute']
 
@@ -69,11 +69,11 @@ def test_caching_extension(tmpdir):
             assert _counter == k
 
 @requires_joblib
-def test_different_instances_same_content(tmpdir):
+def test_different_instances_same_content(tmpdir.strpath):
     global _counter
     x = mdp.numx.array([[100.]], dtype='d')
 
-    cachedir = tempfile.mkdtemp(prefix='mdp-tmp-joblib-cache.', dir=tmpdir)
+    cachedir = tempfile.mkdtemp(prefix='mdp-tmp-joblib-cache.', dir=tmpdir.strpath)
     mdp.caching.activate_caching(cachedir=cachedir)
     node = _CounterNode()
     _counter = 0
@@ -105,7 +105,7 @@ def test_caching_context_manager(tmpdir):
     _counter = 0
 
     assert mdp.get_active_extensions() == []
-    cachedir = tempfile.mkdtemp(prefix='mdp-tmp-joblib-cache.', dir=tmpdir)
+    cachedir = tempfile.mkdtemp(prefix='mdp-tmp-joblib-cache.', dir=tmpdir.strpath)
     with mdp.caching.cache(cachedir=cachedir):
         assert mdp.get_active_extensions() == ['cache_execute']
 
@@ -207,8 +207,8 @@ def test_switch_cache(tmpdir):
     """Test changing cache directory while extension is active."""
     global _counter
 
-    dir1 = tempfile.mkdtemp(prefix='mdp-tmp-joblib-cache.', dir=tmpdir)
-    dir2 = tempfile.mkdtemp(prefix='mdp-tmp-joblib-cache.', dir=tmpdir)
+    dir1 = tempfile.mkdtemp(prefix='mdp-tmp-joblib-cache.', dir=tmpdir.strpath)
+    dir2 = tempfile.mkdtemp(prefix='mdp-tmp-joblib-cache.', dir=tmpdir.strpath)
     x = mdp.numx.array([[10]], dtype='d')
 
     mdp.caching.activate_caching(cachedir=dir1)
